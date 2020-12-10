@@ -14,8 +14,6 @@ const GET_MESSAGES = gql`
 const Messages = ({ user }) => {
 	const { data } = useSubscription(GET_MESSAGES);
 
-	console.log(data);
-
 	if (!data) {
 		return null;
 	}
