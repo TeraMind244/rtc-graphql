@@ -45,7 +45,6 @@ const Chat = () => {
 		<Container>
 			<Messages user={user} />
 			<Row>
-				{/* @ts-ignore */}
 				<Col xs={2}>
 					<FormInput
 						label="User"
@@ -53,7 +52,6 @@ const Chat = () => {
 						onChange={handleChangeUser}
 					/>
 				</Col>
-				{/* @ts-ignore */}
 				<Col xs={8}>
 					<FormInput
 						label="Content"
@@ -62,7 +60,6 @@ const Chat = () => {
 						onKeyUp={handleOnKeyUpContent}
 					/>
 				</Col>
-				{/* @ts-ignore */}
 				<Col xs={2}>
 					<Button onClick={onSendMessage}>Send</Button>
 				</Col>

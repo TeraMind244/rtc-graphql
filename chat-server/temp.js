@@ -4,21 +4,48 @@ const { ApolloServer, gql, PubSub } = require("apollo-server-express");
 
 const messages = [];
 
+const users = [
+	{
+		id: "1",
+		firstName: "Tri",
+		lastName: "Che",
+		yob: 1997,
+		address: {
+			city: "Da Nang",
+			street: "Hoang Dieu",
+		},
+	},
+	{
+		id: "2",
+		firstName: "Van",
+		lastName: "Vi",
+		yob: 1997,
+	},
+];
+
 const typeDefs = gql`
+	type User {
+		id: ID!
+		firstName: String!
+		lastName: String!
+		yob: Int
+		address: Address
+	}
+
 	type Message {
 		id: ID!
-		user: String!
+		user: User!
 		content: String!
 	}
 
-	type User {
-		name: String!,
-		age: Int!
+	type Address {
+		city: String!
+		street: String
 	}
 
 	type Query {
-		messages: [Message!],
-		users: [User!]!
+		messages: [Message!]
+		user(id: ID!): User
 	}
 
 	type Mutation {
@@ -38,16 +65,9 @@ const onMessagesUpdate = (handler) => {
 const resolvers = {
 	Query: {
 		messages: () => messages,
-		users: () => ([
-			{
-				name: "Tri",
-				age: 24
-			},
-			{
-				name: "Tera",
-				age: 28
-			}
-		])
+		user: (parent, { id }) => {
+			return users.find((user) =>  user.id === id);
+		},
 	},
 
 	Mutation: {
